@@ -1,0 +1,163 @@
+<body>
+    <div class="container infinity-container">
+        <div class="row">
+            <div class="col-md-1 infinity-left-space"></div>
+
+            <!-- FORM BEGIN -->
+            <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 text-center infinity-form">
+
+                <div class="text-center mb-3 mt-5">
+
+                </div>
+                <div class="text-center mb-4">
+                    <h4>Register Yourself</h4>
+                </div>
+                <!-- Form -->
+                <form class="px-3" [formGroup]="registerForm">
+                    <!-- Input Box -->
+                    <div class="form-input">
+                        <span><i class="fa fa-user"></i></span>
+                        <input type="text" formControlName="firstName" class="" placeholder="First Name"
+                            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required />
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required"><b>First Name is required</b></div>
+                        </div>
+                    </div>
+
+                    <div class="form-input">
+                        <span><i class="fa fa-user"></i></span>
+                        <input type="text" formControlName="lastName" class="" placeholder="Last Name"
+                            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required />
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required"><b>Last Name is required</b></div>
+                        </div>
+                    </div>
+                    <div class="form-input">
+                        <span><i class="fa fa-user"></i></span>
+                        <textarea formControlName="address" class="" placeholder="Address"
+                            [ngClass]="{ 'is-invalid': submitted && f.address.errors }" required></textarea>
+                        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                            <div *ngIf="f.address.errors.required"><b>Address is required</b></div>
+                        </div>
+                    </div>
+                    <div class="form-input">
+                        <span><i class="fa fa-envelope"></i></span>
+                        <input type="text" formControlName="email" class="" placeholder="Email"
+                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required />
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            <div *ngIf="f.email.errors.email">Email must be a valid</div>
+                        </div>
+                    </div>
+                    <div class="form-input">
+                        <span><i class="fa fa-lock"></i></span>
+                        <input type="password" formControlName="password" class="" placeholder="Password"
+                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required />
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                        </div>
+                    </div>
+                    <div class="form-input">
+                        <span><i class="fa fa-lock"></i></span>
+                        <input type="password" formControlName="confirmPassword" class="" placeholder="Confirm Password"
+                            [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" required />
+                        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                            <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                        </div>
+                    </div>
+                    <div class="form-input">
+                        <span><i class="fa fa-user"></i></span>
+                        <input type="text" formControlName="pincode" class="" placeholder="Pincode"
+                            [ngClass]="{ 'is-invalid': submitted && f.pincode.errors }" required />
+                        <div *ngIf="submitted && f.pincode.errors" class="invalid-feedback">
+                            <div *ngIf="f.pincode.errors.required">Pincode is required</div>
+                            <div *ngIf="f.pincode.errors.pattern">Pincode must be of 6 digits</div>
+                        </div>
+                    </div>
+                    <div class="form-input">
+                        <span><i class="fa fa-phone"></i></span>
+                        <input type="text" formControlName="contact" class="" placeholder="Contact Number"
+                            [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" required />
+                        <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                            <div *ngIf="f.contact.errors.required">Contact is required</div>
+                            <div *ngIf="f.contact.errors.pattern">Contact number must be of 10 digits</div>
+                        </div>
+                    </div>
+                    <!-- Register Button -->
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-lg px-5" *ngIf="this.visible"
+                            (click)="onSubmit()">Register</button>
+                        <button type="submit" (click)="update_btn()" *ngIf="!(this.visible)"
+                            class="btn btn-lg px-5">Update</button>
+                    </div>
+
+                </form>
+
+            </div>
+            <!-- FORM END -->
+<div class="col-md-1 infinity-right-space"></div>
+        </div>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col"> Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <div *ngIf="profileForm.valid" > -->
+            <tr *ngFor="let item of list; let i= index">
+
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.firstName}}</td>
+                <td>{{item.lastName}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.contact}}</td>
+                <td><i class="fa fa-trash" (click)=delete(i)></i>&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-eye" data-toggle="modal" data-target="#exampleModal"></i>&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-pencil" (click)=update(i) data-toggle="modal" data-target="#exampleModal"></i>
+                </td>
+            </tr>
+            <!-- </div> -->
+        </tbody>
+    </table>
+
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+      </button> -->
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+             <div *ngFor="let item of list; let i= index">
+                <div class="form-group">
+                    <!-- <span><i class="fa fa-user"></i></span> -->
+                    <input type="text" class="form-control" id="firstName" value={{item.firstName}}>
+                  </div>
+                 </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
