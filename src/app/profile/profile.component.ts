@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
-    }
+     }
 
     this.list.push(this.registerForm.value);
     localStorage.setItem('form-data', JSON.stringify(this.list));
@@ -78,7 +78,7 @@ export class ProfileComponent implements OnInit {
     localStorage.setItem('form-data', JSON.stringify(this.list));
     this.registerForm.reset();
   }
-  
+
   // reset(){
   //   this.registerForm.reset();
   // }
